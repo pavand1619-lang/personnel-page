@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personnel Information</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-container">
+          <!-- Placeholder red logo -->
+          <div class="logo-icon"></div>
+          <div class="logo-text">
+            <strong>NDT CERTIFICATION</strong>
+            <span>TRACKING</span>
+          </div>
+        </div>
+        <div class="sidebar-collapse">
+          <i class="ph ph-caret-left"></i>
+        </div>
+      </div>
+
+      <div class="sidebar-menu">
+        <div class="menu-section">
+          <div class="menu-title">COMPANY</div>
+          <a href="#" class="menu-item active"><i class="ph ph-users"></i> Personnel</a>
+          <a href="#" class="menu-item"><i class="ph ph-certificate"></i> Certificates</a>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="top-header">
+        <div class="header-title">Personnel Information</div>
+        <div class="header-actions">
+          <div class="switch-company">
+            <select>
+              <option>Switch Company</option>
+            </select>
+          </div>
+          <div class="user-profile">
+            <div class="avatar-small orange-bg">N</div>
+            <span class="user-name">NDT</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <div class="split-view">
+
+          <!-- Left Panel -->
+          <div class="list-panel card">
+            <div class="list-header">
+              <h2>Personnel</h2>
+              <div class="list-actions">
+                <button class="icon-btn"><i class="ph ph-funnel"></i></button>
+                <button class="primary-btn" id="btnAddTop"><i class="ph ph-plus"></i> Add</button>
+              </div>
+            </div>
+
+            <div class="personnel-list" id="personnelList">
+              <!-- Rendered via JS -->
+            </div>
+
+            <div class="pagination">
+              <select class="page-size">
+                <option>20 / pg</option>
+              </select>
+              <div class="page-controls">
+                <button class="icon-btn-small" disabled><i class="ph ph-caret-left"></i></button>
+                <span>1 of 1</span>
+                <button class="icon-btn-small" disabled><i class="ph ph-caret-right"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Panel -->
+          <div class="detail-panel">
+            <div class="detail-card card top-info">
+              <div class="profile-header">
+                <div class="profile-identity">
+                  <div class="avatar-large" id="detailAvatar">DG</div>
+                  <div class="profile-name-group">
+                    <h2 id="detailName">dharani gedela</h2>
+                    <span id="detailDept">No Department</span>
+                  </div>
+                </div>
+                <div class="profile-actions">
+                  <button class="secondary-btn"><i class="ph ph-envelope-simple"></i> Send Message</button>
+                  <button class="secondary-btn"><i class="ph ph-certificate"></i> Generate Certificate</button>
+                </div>
+              </div>
+
+              <div class="tabs">
+                <button class="tab-btn active" data-tab="personal">Personal Info</button>
+                <button class="tab-btn" data-tab="education">Education & Qualifications</button>
+                <button class="tab-btn" data-tab="training">Training Records</button>
+                <button class="tab-btn" data-tab="visual">Visual Acuity Records</button>
+                <button class="tab-btn" data-tab="ojt">OJT</button>
+                <button class="tab-btn" data-tab="certifications">Certifications</button>
+                <button class="tab-btn" data-tab="documents">Documents</button>
+              </div>
+            </div>
+
+            <div class="detail-card card content-info">
+              <div class="content-header">
+                <h3 id="tabContentTitle">Personal Information</h3>
+                <button class="secondary-btn-small" id="btnEdit"><i class="ph ph-pencil-simple"></i> Edit</button>
+              </div>
+
+              <!-- Tab Content: Personal -->
+              <div class="tab-content active" id="tab-personal">
+                <div class="info-grid">
+                  <div class="info-group">
+                    <label>First Name</label>
+                    <div class="info-val" id="infoFirstName">-</div>
+                  </div>
+                  <div class="info-group">
+                    <label>Last Name</label>
+                    <div class="info-val" id="infoLastName">-</div>
+                  </div>
+                  <div class="info-group">
+                    <label>Full Name</label>
+                    <div class="info-val" id="infoFullName">-</div>
+                  </div>
+
+                  <div class="info-group">
+                    <label>Employee ID</label>
+                    <div class="info-val" id="infoEmpId">-</div>
+                  </div>
+                  <div class="info-group">
+                    <label>Email</label>
+                    <div class="info-val" id="infoEmail">-</div>
+                  </div>
+                  <div class="info-group">
+                    <label>Phone</label>
+                    <div class="info-val" id="infoPhone">-</div>
+                  </div>
+
+                  <div class="info-group">
+                    <label>Department</label>
+                    <div class="info-val" id="infoDepartmentDesc">-</div>
+                  </div>
+                  <div class="info-group">
+                    <label>Location</label>
+                    <div class="info-val" id="infoLocation">-</div>
+                  </div>
+                  <div class="info-group">
+                    <label>Supervisor</label>
+                    <div class="info-val" id="infoSupervisor">-</div>
+                  </div>
+
+                  <div class="info-group">
+                    <label>Status</label>
+                    <div class="info-val"><span class="status-badge" id="infoStatus">Active</span></div>
+                  </div>
+                  <div class="info-group col-span-2">
+                    <label>Address</label>
+                    <div class="info-val" id="infoAddress">-</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Generic Tab Contents for demonstration -->
+              <div class="tab-content hidden" id="tab-education">
+                <div class="sub-tabs">
+                  <button class="sub-tab-btn active" data-subtab="edu-list">Education</button>
+                  <button class="sub-tab-btn" data-subtab="job-history">Job History</button>
+                  <button class="sub-tab-btn" data-subtab="method-exp">Method Experience</button>
+                  <button class="sub-tab-btn" data-subtab="resume">Resume</button>
+                </div>
+
+                <!-- Education List -->
+                <div class="sub-tab-content active" id="subtab-edu-list">
+                  <div class="content-header">
+                    <h3>Education</h3>
+                    <button class="primary-btn-pill" onclick="openEducationModal()"><i class="ph ph-plus"></i>
+                      Add</button>
+                  </div>
+                  <div class="data-table-container">
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th>Diploma/Degree</th>
+                          <th>School</th>
+                          <th>Year</th>
+                          <th>Doc</th>
+                          <th style="text-align: right;">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="eduTableBody">
+                        <tr>
+                          <td colspan="5" class="empty-state">No education records found.</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <!-- Job History -->
+                <div class="sub-tab-content hidden" id="subtab-job-history">
+                  <div class="content-header">
+                    <h3>Job History</h3>
+                    <button class="primary-btn-pill" onclick="openJobHistoryModal()"><i class="ph ph-plus"></i>
+                      Add</button>
+                  </div>
+                  <div class="data-table-container">
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th>Company</th>
+                          <th>Position</th>
+                          <th>Dates</th>
+                          <th>Doc</th>
+                          <th style="text-align: right;">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="jhTableBody">
+                        <tr>
+                          <td colspan="5" class="empty-state">No job history found.</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <!-- Method Experience -->
+                <div class="sub-tab-content hidden" id="subtab-method-exp">
+                  <div class="content-header">
+                    <h3>Method Experience</h3>
+                    <button class="primary-btn-pill" onclick="openExperienceModal()"><i class="ph ph-plus"></i>
+                      Add</button>
+                  </div>
+                  <div class="data-table-container">
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th>Method</th>
+                          <th>Hours</th>
+                          <th style="text-align: right;">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="expTableBody">
+                        <tr>
+                          <td colspan="3" class="empty-state">No experience records found.</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <!-- Resume -->
+                <div class="sub-tab-content hidden" id="subtab-resume">
+                  <div style="text-align: center; margin-bottom: 24px; margin-top: 16px;">
+                    <span class="hint" style="color: #6b7280; font-size: 14px;">Upload resumes or other qualification
+                      documents (PDF, DOCX, JPG, PNG, BMP).</span>
+                  </div>
+                  <div class="file-explorer-container" style="margin-top: 0;">
+                    <div class="explorer-sidebar">
+                      <div class="explorer-sidebar-header">
+                        <span>Folders</span>
+                        <div class="search-input-small">
+                          <input type="text" placeholder="Search...">
+                        </div>
+                      </div>
+                      <div class="folder-tree">
+                        <div class="folder-item active"><i class="ph-fill ph-folder" style="color: #3b82f6;"></i> Root
+                        </div>
+                      </div>
+                    </div>
+                    <div class="explorer-main">
+                      <div class="explorer-toolbar">
+                        <strong>Root</strong>
+                        <div class="toolbar-actions" style="display: flex; gap: 8px; align-items: center;">
+                          <button class="icon-btn-small"
+                            style="border: 1px solid var(--border-color); border-radius: 4px; padding: 4px; background: transparent;"><i
+                              class="ph ph-list-dashes"></i></button>
+                          <button class="icon-btn-small"
+                            style="border: 1px solid var(--border-color); border-radius: 4px; padding: 4px; background: transparent;"><i
+                              class="ph ph-squares-four"></i></button>
+
+                          <!-- File Upload trigger -->
+                          <input type="file" id="resumeFileInput" class="hidden">
+                          <button class="primary-icon-btn"
+                            onclick="document.getElementById('resumeFileInput').click()"><i
+                              class="ph ph-file-plus"></i></button>
+
+                          <button class="icon-btn-small"
+                            style="border: 1px solid var(--border-color); border-radius: 4px; padding: 4px; background: transparent;"><i
+                              class="ph ph-folder-plus" style="color: #3b82f6;"></i></button>
+                        </div>
+                      </div>
+                      <div class="explorer-body">
+                        <div class="empty-folder">
+                          <i class="ph ph-folder" style="font-size: 48px; color: #d1d5db; margin-bottom: 8px;"></i>
+                          <p style="font-weight: 600; color: #4b5563;">This folder is empty</p>
+                          <span class="hint"
+                            style="display: block; margin-top: 6px; color: #9ca3af; font-size: 13px; line-height: 1.4;">Folders
+                            and files can be dragged and dropped here specifically for the selected folder.<br>(Max
+                            size: 100MB)</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Training Records Tab Content -->
+              <div class="tab-content hidden" id="tab-training">
+                <div class="content-header">
+                  <h3>Training Records</h3>
+                  <button class="primary-btn-pill" onclick="openTrainingModal()"><i class="ph ph-plus"></i> Add
+                    Training</button>
+                </div>
+                <div class="data-table-container">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>Method / Level</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>Hrs</th>
+                        <th>Provider</th>
+                        <th>Doc</th>
+                        <th style="text-align: right;">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td colspan="7" class="empty-state">No training records found.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- Visual Acuity Records Tab Content -->
+              <div class="tab-content hidden" id="tab-visual">
+                <div class="content-header">
+                  <h3>Eye Exams</h3>
+                  <button class="primary-btn-pill"><i class="ph ph-plus"></i> Add</button>
+                </div>
+                <div class="data-table-container">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>Exam Date</th>
+                        <th>Valid Till</th>
+                        <th>Examiner</th>
+                        <th>Result</th>
+                        <th>Certificate</th>
+                        <th>Status</th>
+                        <th style="text-align: right;">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td colspan="7" class="empty-state">No eye exams recorded.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- OJT Tab Content -->
+              <div class="tab-content hidden" id="tab-ojt">
+                <div class="resume-header-top" style="margin-bottom: 16px; margin-top: 8px;">
+                  <span class="hint"
+                    style="color: #f97316; display: flex; align-items: center; gap: 6px; font-weight: 500;">
+                    <i class="ph ph-upload-simple"></i> Folders and files can be dragged and dropped here specifically
+                    for the selected folder. (Max size: 100MB)
+                  </span>
+                </div>
+                <div class="file-explorer-container" style="margin-top: 0;">
+                  <div class="explorer-sidebar">
+                    <div class="explorer-sidebar-header">
+                      <span>Folders</span>
+                      <div class="search-input-small">
+                        <input type="text" placeholder="Search...">
+                      </div>
+                    </div>
+                    <div class="folder-tree">
+                      <div class="folder-item active"><i class="ph-fill ph-folder" style="color: #3b82f6;"></i> Root
+                      </div>
+                    </div>
+                  </div>
+                  <div class="explorer-main">
+                    <div class="explorer-toolbar">
+                      <strong>Root</strong>
+                      <div class="toolbar-actions">
+                        <button class="icon-btn-small"
+                          style="border: 1px solid var(--border-color); border-radius: 4px; padding: 4px;"><i
+                            class="ph ph-list-dashes"></i></button>
+                        <button class="icon-btn-small"
+                          style="border: 1px solid var(--border-color); border-radius: 4px; padding: 4px;"><i
+                            class="ph ph-squares-four"></i></button>
+                        <button class="primary-btn-pill" style="border-radius: 4px; height: 28px; padding: 0 12px;"><i
+                            class="ph ph-file-text"></i> Create OJT Log</button>
+                        <button class="icon-btn-small"
+                          style="border: 1px solid var(--border-color); border-radius: 4px; padding: 4px;"><i
+                            class="ph ph-file-plus"></i></button>
+                        <button class="primary-icon-btn"><i class="ph ph-folder-plus"></i></button>
+                        <button class="icon-btn-small"
+                          style="border: 1px solid var(--border-color); border-radius: 4px; padding: 4px; background: #f3f4f6;"><i
+                            class="ph ph-archive-box"></i></button>
+                      </div>
+                    </div>
+                    <div class="explorer-body">
+                      <div class="empty-folder">
+                        <i class="ph ph-folder" style="font-size: 48px; color: #d1d5db; margin-bottom: 8px;"></i>
+                        <p>This folder is empty</p>
+                        <span class="hint"
+                          style="display: block; margin-top: 6px; color: #9ca3af; font-size: 13px; line-height: 1.4;">Folders
+                          and files can be dragged and dropped here specifically for the selected folder.<br>(Max size:
+                          100MB)</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Certifications Tab Content -->
+              <div class="tab-content hidden" id="tab-certifications">
+                <div class="content-header" style="align-items: center;">
+                  <h3>Certifications</h3>
+                  <div style="display: flex; gap: 12px; align-items: center;">
+                    <div style="position: relative;">
+                      <i class="ph ph-magnifying-glass"
+                        style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #9ca3af;"></i>
+                      <input type="text" placeholder="Search method/level..."
+                        style="padding: 6px 12px 6px 36px; border: 1px solid var(--border-color); border-radius: 20px; font-size: 13px; outline: none; width: 180px; color: var(--text-main);">
+                    </div>
+                    <div
+                      style="display: flex; border: 1px solid var(--border-color); border-radius: 20px; overflow: hidden; background: white;">
+                      <button
+                        style="padding: 6px 12px; border: none; background: transparent; font-size: 13px; display: flex; align-items: center; gap: 6px; cursor: pointer; border-right: 1px solid var(--border-color); color: var(--text-muted);"><i
+                          class="ph ph-list-dashes"></i> Card</button>
+                      <button
+                        style="padding: 6px 12px; border: none; background: transparent; font-size: 13px; display: flex; align-items: center; gap: 6px; cursor: pointer; color: var(--text-main); font-weight: 600;"><i
+                          class="ph ph-squares-four"></i> Grid</button>
+                    </div>
+                    <button class="primary-btn-pill"><i class="ph ph-plus"></i> Add Certification</button>
+                  </div>
+                </div>
+                <div class="data-table-container">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>Method - Level</th>
+                        <th>Valid Till</th>
+                        <th>Composite</th>
+                        <th>Status</th>
+                        <th>Doc</th>
+                        <th>Cert</th>
+                        <th style="text-align: right;">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td colspan="7" class="empty-state">No certifications found.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- Documents Tab Content -->
+              <div class="tab-content hidden" id="tab-documents">
+                <div class="resume-header-top" style="margin-bottom: 16px; margin-top: 8px;">
+                  <span class="hint"
+                    style="color: #f97316; display: flex; align-items: center; gap: 6px; font-weight: 500;">
+                    <i class="ph ph-upload-simple"></i> Folders and files can be dragged and dropped here specifically
+                    for the selected folder. (Max size: 100MB)
+                  </span>
+                </div>
+                <div class="file-explorer-container" style="margin-top: 0;">
+                  <div class="explorer-sidebar">
+                    <div class="explorer-sidebar-header">
+                      <span>Folders</span>
+                      <div class="search-input-small">
+                        <input type="text" placeholder="Search...">
+                      </div>
+                    </div>
+                    <div class="folder-tree">
+                      <div class="folder-item active"><i class="ph-fill ph-folder" style="color: #3b82f6;"></i> Root
+                      </div>
+                    </div>
+                  </div>
+                  <div class="explorer-main">
+                    <div class="explorer-toolbar">
+                      <strong>Root</strong>
+                      <div class="toolbar-actions">
+                        <button class="icon-btn-small"
+                          style="border: 1px solid var(--border-color); border-radius: 4px; padding: 4px;"><i
+                            class="ph ph-list-dashes"></i></button>
+                        <button class="icon-btn-small"
+                          style="border: 1px solid var(--border-color); border-radius: 4px; padding: 4px;"><i
+                            class="ph ph-squares-four"></i></button>
+                        <button class="icon-btn-small"
+                          style="border: 1px solid var(--border-color); border-radius: 4px; padding: 4px;"><i
+                            class="ph ph-file-plus"></i></button>
+                        <button class="primary-icon-btn"><i class="ph ph-folder-plus"></i></button>
+                        <button class="icon-btn-small"
+                          style="border: 1px solid var(--border-color); border-radius: 4px; padding: 4px; background: #f3f4f6;"><i
+                            class="ph ph-archive-box"></i></button>
+                      </div>
+                    </div>
+                    <div class="explorer-body">
+                      <div class="empty-folder">
+                        <i class="ph ph-folder" style="font-size: 48px; color: #d1d5db; margin-bottom: 8px;"></i>
+                        <p>This folder is empty</p>
+                        <span class="hint"
+                          style="display: block; margin-top: 6px; color: #9ca3af; font-size: 13px; line-height: 1.4;">Folders
+                          and files can be dragged and dropped here specifically for the selected folder.<br>(Max size:
+                          100MB)</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Add/Edit Modal -->
+  <div class="modal-overlay hidden" id="modalOverlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div>
+          <h2 id="modalTitle">Add New Personnel</h2>
+          <p id="modalDesc">Create a new personnel profile in the system.</p>
+        </div>
+        <button class="close-btn" id="btnModalClose"><i class="ph ph-x"></i></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-scroll">
+          <div class="profile-photo-upload">
+            <div class="photo-placeholder"><i class="ph ph-user"></i></div>
+            <div class="upload-controls">
+              <label>Profile Photo</label>
+              <div class="file-input-wrapper">
+                <input type="file" id="profilePhotoInput" class="hidden" accept="image/png, image/jpeg">
+                <button type="button" class="choose-file-btn" id="btnChoosePhoto">Choose file</button>
+                <span class="file-name" id="photoFileName">No file chosen</span>
+              </div>
+              <span class="hint">Recommended: Square image, PNG or JPG.</span>
+            </div>
+          </div>
+
+          <form id="personnelForm">
+            <input type="hidden" id="editId" value="">
+            <div class="form-row twice">
+              <div class="input-group">
+                <label>First Name *</label>
+                <div class="input-with-icon">
+                  <i class="ph ph-user"></i>
+                  <input type="text" id="fName" placeholder="John" required>
+                </div>
+              </div>
+              <div class="input-group">
+                <label>Last Name *</label>
+                <div class="input-with-icon">
+                  <i class="ph ph-user"></i>
+                  <input type="text" id="lName" placeholder="Doe" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row single">
+              <div class="input-group">
+                <label>Employee ID</label>
+                <div class="input-with-icon">
+                  <i class="ph ph-hash"></i>
+                  <input type="text" id="eId" placeholder="EMP-001">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row single">
+              <div class="input-group">
+                <label>Email Address *</label>
+                <div class="input-with-icon">
+                  <i class="ph ph-envelope-simple"></i>
+                  <input type="email" id="email" placeholder="john@example.com" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row twice">
+              <div class="input-group">
+                <label>Department</label>
+                <div class="input-with-icon">
+                  <i class="ph ph-buildings"></i>
+                  <input type="text" id="dept" placeholder="Search department...">
+                </div>
+              </div>
+              <div class="input-group">
+                <label>Status</label>
+                <select id="status">
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row twice">
+              <div class="input-group">
+                <label>Location</label>
+                <input type="text" id="loc" placeholder="e.g. New York Office">
+              </div>
+              <div class="input-group">
+                <label>Supervisor</label>
+                <input type="text" id="sup" placeholder="Search supervisor...">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="secondary-btn" id="btnModalCancel">Cancel</button>
+        <button class="primary-btn" id="btnModalSave"><i class="ph ph-floppy-disk"></i> Save Personnel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Education Modal -->
+  <div class="modal-overlay hidden" id="educationModal">
+    <div class="modal-box" style="width: 500px;">
+      <div class="modal-header">
+        <div>
+          <h2 style="font-size: 18px; font-weight: 600; color: var(--text-main); margin-bottom: 4px;">Add Education</h2>
+          <p style="font-size: 13px; color: var(--text-muted);">Add a new educational record.</p>
+        </div>
+        <button class="close-btn" onclick="closeEducationModal()"><i class="ph ph-x"></i></button>
+      </div>
+      <div class="modal-body" style="padding: 24px;">
+        <form id="educationForm" style="display: flex; flex-direction: column; gap: 16px;">
+          <div class="input-group">
+            <label>Diploma/Degree *</label>
+            <input type="text" id="eduDegree" required>
+          </div>
+          <div class="input-group">
+            <label>School *</label>
+            <input type="text" id="eduSchool" required>
+          </div>
+          <div class="input-group">
+            <label>Year *</label>
+            <input type="text" id="eduYear" required>
+          </div>
+          <div class="input-group">
+            <label>Document</label>
+            <div
+              style="border: 1px solid var(--border-color); border-radius: 6px; padding: 4px; display: flex; align-items: center;">
+              <input type="file" id="eduDocument" style="border: none; padding: 4px; font-size: 13px; width: 100%;">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="secondary-btn" onclick="closeEducationModal()">Cancel</button>
+        <button class="primary-btn" onclick="saveEducation()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Job History Modal -->
+  <div class="modal-overlay hidden" id="jobHistoryModal">
+    <div class="modal-box" style="width: 700px;">
+      <div class="modal-header">
+        <div>
+          <h2 style="font-size: 18px; font-weight: 600; color: var(--text-main); margin-bottom: 4px;">Add Job History
+          </h2>
+          <p style="font-size: 13px; color: var(--text-muted);">Add a new employment record.</p>
+        </div>
+        <button class="close-btn" onclick="closeJobHistoryModal()"><i class="ph ph-x"></i></button>
+      </div>
+      <div class="modal-body" style="padding: 24px;">
+        <form id="jobHistoryForm" style="display: flex; flex-direction: column; gap: 20px;">
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="input-group">
+              <label>Company *</label>
+              <input type="text" id="jhCompany" required>
+            </div>
+            <div class="input-group">
+              <label>Position *</label>
+              <input type="text" id="jhPosition" required>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="input-group">
+              <label>From Date *</label>
+              <input type="text" id="jhFromDate" placeholder="MM/DD/YYYY" required>
+            </div>
+            <div class="input-group">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <label>End Date *</label>
+                <label
+                  style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 400; color: var(--text-muted); cursor: pointer;">
+                  <input type="checkbox" id="jhCurrentEmp" style="width: 14px; height: 14px;"> Current Employer
+                </label>
+              </div>
+              <input type="text" id="jhEndDate" placeholder="MM/DD/YYYY" required>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>Experience Certificate / Document</label>
+            <div
+              style="border: 1px solid var(--border-color); border-radius: 6px; padding: 4px; display: flex; align-items: center;">
+              <input type="file" id="jhDocument" style="border: none; padding: 4px; font-size: 13px; width: 100%;">
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="secondary-btn" onclick="closeJobHistoryModal()">Cancel</button>
+        <button class="primary-btn" onclick="saveJobHistory()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Experience Modal -->
+  <div class="modal-overlay hidden" id="experienceModal">
+    <div class="modal-box" style="width: 500px;">
+      <div class="modal-header">
+        <div>
+          <h2 style="font-size: 18px; font-weight: 600; color: var(--text-main); margin-bottom: 4px;">Add Experience
+          </h2>
+          <p style="font-size: 13px; color: var(--text-muted);">Add new cumulative hours for a method.</p>
+        </div>
+        <button class="close-btn" onclick="closeExperienceModal()"><i class="ph ph-x"></i></button>
+      </div>
+      <div class="modal-body" style="padding: 24px;">
+        <form id="experienceForm" style="display: flex; flex-direction: column; gap: 16px;">
+          <div class="input-group">
+            <label>Method *</label>
+            <input type="text" id="expMethod" placeholder="e.g. UT, PT, MT" required>
+          </div>
+          <div class="input-group">
+            <label>Hours *</label>
+            <input type="text" id="expHours" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="secondary-btn" onclick="closeExperienceModal()">Cancel</button>
+        <button class="primary-btn" onclick="saveExperience()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Training Modal -->
+  <div class="modal-overlay hidden" id="trainingModal">
+    <div class="modal-box" style="width: 700px; max-height: 90vh;">
+      <div class="modal-header">
+        <div>
+          <h2 style="font-size: 18px; font-weight: 600; color: var(--text-main); margin-bottom: 4px;">Add Training</h2>
+          <p style="font-size: 13px; color: var(--text-muted);">Register a new training record for personnel.</p>
+        </div>
+        <button class="close-btn" onclick="closeTrainingModal()"><i class="ph ph-x"></i></button>
+      </div>
+      <div class="modal-body" style="padding: 24px; overflow-y: auto;">
+        <form id="trainingForm" style="display: flex; flex-direction: column; gap: 20px;">
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="input-group">
+              <label>Method</label>
+              <select id="trMethod" style="color: var(--text-muted);">
+                <option value="">Select Method...</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label>Level</label>
+              <select id="trLevel" style="color: var(--text-muted);">
+                <option value="">Select Level</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="input-group">
+              <label>Training Type</label>
+              <select id="trType" style="color: var(--text-main);">
+                <option value="Initial">Initial</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label>Total Hours</label>
+              <input type="text" id="trHours" placeholder="e.g. 40">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>Training Provider</label>
+            <input type="text" id="trProvider" placeholder="Institute or Company Name">
+          </div>
+
+          <div class="input-group">
+            <label>Instructor Name</label>
+            <input type="text" id="trInstructor" placeholder="Instructor Name">
+          </div>
+
+          <div class="input-group">
+            <label>Location</label>
+            <input type="text" id="trLocation" placeholder="City, State or Address">
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="secondary-btn" onclick="closeTrainingModal()">Cancel</button>
+        <button class="primary-btn" onclick="saveTraining()"><i class="ph ph-floppy-disk"></i> Save Record</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
