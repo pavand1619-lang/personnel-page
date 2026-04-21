@@ -9,7 +9,7 @@ let personnel = [
     email: "dharani@crop",
     phone: "-",
     dept: "",
-    loc: "vizag",
+    loc: "PUNE",
     sup: "-",
     status: "Active",
     address: "-"
@@ -90,7 +90,7 @@ function renderDetails() {
   };
   Object.keys(fields).forEach(id => {
     const el = document.getElementById(id);
-    if(el) el.textContent = fields[id];
+    if (el) el.textContent = fields[id];
   });
 
   renderEducation();
@@ -256,7 +256,7 @@ subTabBtns.forEach(btn => {
   btn.addEventListener("click", () => {
     subTabBtns.forEach(b => b.classList.remove("active"));
     subTabContents.forEach(c => c.classList.add("hidden"));
-    
+
     btn.classList.add("active");
     const subTabId = btn.getAttribute("data-subtab");
     document.getElementById("subtab-" + subTabId).classList.remove("hidden");
@@ -294,7 +294,7 @@ function renderTable(data, tbodyId, emptyMsg, colCount, rowHTML) {
 
 // --- Simplified Modal Helpers ---
 const toggleModal = (modal, form, show) => {
-  if(show && form) document.getElementById(form).reset();
+  if (show && form) document.getElementById(form).reset();
   modal.classList[show ? 'remove' : 'add']("hidden");
 };
 
@@ -305,7 +305,7 @@ const closeEducationModal = () => toggleModal(educationModal, null, false);
 
 function renderEducation() {
   const p = getActivePerson();
-  if(!p) return;
+  if (!p) return;
   renderTable(p.education, "eduTableBody", "No education records found.", 5, (edu, idx) => `
     <tr>
       <td>${edu.degree}</td><td>${edu.school}</td><td>${edu.year}</td>
@@ -318,7 +318,7 @@ function saveEducation() {
   const degree = document.getElementById("eduDegree").value.trim();
   const school = document.getElementById("eduSchool").value.trim();
   const year = document.getElementById("eduYear").value.trim();
-  
+
   if (!degree || !school || !year) {
     alert("Please fill all required fields (*).");
     return;
@@ -363,7 +363,7 @@ if (jhCurrentEmp) {
 
 function renderJobHistory() {
   const p = getActivePerson();
-  if(!p) return;
+  if (!p) return;
   renderTable(p.jobHistory, "jhTableBody", "No job history found.", 5, (jh, idx) => `
     <tr>
       <td>${jh.company}</td><td>${jh.position}</td><td>${jh.fromDate} - ${jh.endDate}</td>
@@ -404,7 +404,7 @@ const closeExperienceModal = () => toggleModal(experienceModal, null, false);
 
 function renderExperience() {
   const p = getActivePerson();
-  if(!p) return;
+  if (!p) return;
   renderTable(p.experience, "expTableBody", "No experience records found.", 3, (exp, idx) => `
     <tr>
       <td><strong>${exp.method}</strong></td><td>${exp.hours} hrs</td>

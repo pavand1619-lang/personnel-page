@@ -977,7 +977,7 @@ body {
 
 .primary-icon-btn {
   background-color: var(--primary);
-  color: white;
+  color: black;
   border: none;
   width: 28px;
   height: 28px;
